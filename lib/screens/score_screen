@@ -1,0 +1,51 @@
+// import 'package:aap1/screens/category_screen.dart';
+import 'package:quiz_app_iti/screens/category_screen.dart';
+import 'package:quiz_app_iti/screens/landing_screen.dart';
+//import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+
+class ScoreScreen extends StatelessWidget {
+  const ScoreScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Padding(
+        padding: EdgeInsets.all(22),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("Hello Abdallah, you have finished the quiz, and your score is"),
+            Text(
+              "13/20",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, fontSize: 22, color: Colors.red),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => CategoryScreen(),
+                  ),
+                );
+              },
+              child: Text("Play again"),
+            ),
+            OutlinedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute<void>(
+                    builder: (BuildContext context) => LandingScreen(),
+                  ),
+                );
+              },
+              child: Text("Exit"),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}

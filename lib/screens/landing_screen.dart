@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:quiz_app_iti/screens/login_screen.dart';
 
 class LandingScreen extends StatelessWidget {
   const LandingScreen({Key? key}) : super(key: key);
@@ -58,12 +59,16 @@ class LandingScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                        builder: (BuildContext context) => LoginScreen()),
+                  );
+                },
                 child: const Text(
                   'Start ',
-                  style: TextStyle(
-                    fontSize: 20,
-                  ),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
               ),
             ),
