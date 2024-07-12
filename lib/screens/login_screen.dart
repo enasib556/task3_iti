@@ -1,10 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app_iti/screens/category_screen.dart';
+import 'package:quiz_app_iti/utils/globals.dart';
 import 'package:quiz_app_iti/utils/icons.dart'; // تأكد من أن المسار صحيح
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({super.key});
+
   final _formkey = GlobalKey<FormState>();
+  final userNameController = TextEditingController();
+  final passwordController = TextEditingController();
+
+  // Function to reset the text fields
+  void resetFields() {
+    userNameController.clear();
+    passwordController.clear();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,13 +58,14 @@ class LoginScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 12),
                       TextFormField(
+                        controller: userNameController,
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return "username field can not be empty ";
+                          if (value == null || value.isEmpty) {
+                            return "Username field cannot be empty";
                           } else if (value.length < 3) {
-                            return " username must be more than 3 character";
+                            return "Username must be more than 3 characters";
                           }
-                          return null; // أضف هذا السطر لإرجاع `null` عند عدم وجود خطأ
+                          return null;
                         },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.person),
@@ -66,13 +78,15 @@ class LoginScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 12),
                       TextFormField(
+                        controller: passwordController,
+                        obscureText: true,
                         validator: (value) {
-                          if (value!.isEmpty) {
-                            return "Password field can not be empty ";
-                          } else if (value.length < 3) {
-                            return " Password must be more than 3 character";
+                          if (value == null || value.isEmpty) {
+                            return "Password field cannot be empty";
+                          } else if (value.length < 6) {
+                            return "Password must be more than or equal to 6 characters";
                           }
-                          return null; // أضف هذا السطر لإرجاع `null` عند عدم وجود خطأ
+                          return null;
                         },
                         decoration: InputDecoration(
                           prefixIcon: Icon(Icons.lock),
@@ -111,6 +125,8 @@ class LoginScreen extends StatelessWidget {
                           ),
                           onPressed: () {
                             if (_formkey.currentState?.validate() ?? false) {
+                              username = userNameController.text;
+                              resetFields(); // Reset fields after successful login
                               Navigator.push(
                                 context,
                                 MaterialPageRoute<void>(
